@@ -20,15 +20,13 @@ install:
   # cf. https://stackoverflow.com/questions/24878737/what-is-the-difference-between-go-get-and-go-install
   - set GO111MODULE=off
   - go get github.com/tischda/go2xunit
-  - set GO111MODULE=on
 
 build_script:
-  - go build
+  - go build -ldflags "all=-s -w"
 
 test_script:
   - go test -v -cover
   - go test -v | go2xunit.exe -xunitnet > xunit-report.xml
-  - gcd.exe data
 
 artifacts:
   - path: gcd.exe
