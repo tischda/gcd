@@ -1,4 +1,4 @@
-﻿# gcd [![Build status](https://ci.appveyor.com/api/projects/status/KEY=true)](https://ci.appveyor.com/project/tischda/gcd)
+﻿# gcd [![Build status](https://ci.appveyor.com/api/projects/status/n3oqlhfscxyuhvcq?svg=true)](https://ci.appveyor.com/project/tischda/gcd)
 
 Windows utility written in [Go](https://www.golang.org) to serve arguments to a "cd" command alias.
 
