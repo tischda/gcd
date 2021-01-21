@@ -27,17 +27,17 @@ gcd <path>
 Example:
 
 ~~~
-c:\gcd.exe c:\temp
+c:\> gcd.exe c:\temp
 c:\temp
 
-c:\gcd.exe e:\temp
-/d c:\temp
+c:\> gcd.exe e:\temp
+/d e:\temp
 ~~~
 
 To actually change the working directory, define an alias to the cd command:
 
 ~~~
-ncd=FOR /F delims^=^"^ tokens^=1 %G IN ('gcd $1') do @cd %G
+ncd=FOR /F "tokens=1 delims='" %G IN ('gcd $1') do @cd %G
 ~~~
 
 (I am using [cmder](https://cmder.net/))

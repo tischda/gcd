@@ -25,8 +25,16 @@ func addSwitchIfNeeded(path, cwd string) string {
 		a := strings.ToLower(cwd)[0]
 		b := strings.ToLower(path)[0]
 		if a != b {
-			return ("/d " + path)
+			return ("/d " + quote(path))
 		}
+	}
+	return quote(path)
+}
+
+// Quotes path if it contains spaces
+func quote(path string) string {
+	if strings.Contains(path, " ") {
+		return "\"" + path + "\""
 	}
 	return path
 }
