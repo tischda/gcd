@@ -7,7 +7,7 @@ PROJECT_DIR=$(notdir $(shell pwd))
 all: build
 
 build: 
-	go build
+	go build -ldflags "all=-s -w"
 
 cover:
 	go test -coverprofile=coverage.out
