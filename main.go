@@ -2,22 +2,25 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"regexp"
 	"strings"
 )
 
 func main() {
-	cwd, _ := os.Getwd()
-	fmt.Println(injectSlashDIfneeded(os.Args[1], cwd))
+	if len(os.Args) < 2 {
+		// no path given, cd alias should execute the command [cd] which prints cwd
+		fmt.Println(" ") // so that for loop returns a token (cf. README.md) and executes cd <space>
+	} else {
+		cwd, _ := os.Getwd()
+		fmt.Println(addSwitchIfNeeded(os.Args[1], cwd))
+	}
 }
 
-func injectSlashDIfneeded(path, cwd string) string {
-	matched, err := regexp.MatchString("^[a-zA-Z]:", path)
-	if err != nil {
-		log.Fatalln(err)
-	}
+// Use the /D switch to change current drive in addition to changing current
+// directory for a drive.
+func addSwitchIfNeeded(path, cwd string) string {
+	matched, _ := regexp.MatchString("^[a-zA-Z]:", path)
 	if matched {
 		a := strings.ToLower(cwd)[0]
 		b := strings.ToLower(path)[0]

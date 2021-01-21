@@ -7,7 +7,7 @@ import (
 
 func TestSimple(t *testing.T) {
 
-	actual := injectSlashDIfneeded("go", "e:\\src")
+	actual := addSwitchIfNeeded("go", "e:\\src")
 	expected := "go"
 
 	if !strings.Contains(actual, expected) {
@@ -17,7 +17,7 @@ func TestSimple(t *testing.T) {
 
 func TestSame(t *testing.T) {
 
-	actual := injectSlashDIfneeded("e:\\go", "e:\\src")
+	actual := addSwitchIfNeeded("e:\\go", "e:\\src")
 	expected := "e:\\go"
 
 	if !strings.Contains(actual, expected) {
@@ -27,7 +27,7 @@ func TestSame(t *testing.T) {
 
 func TestDifferent(t *testing.T) {
 
-	actual := injectSlashDIfneeded("c:\\go", "e:\\src")
+	actual := addSwitchIfNeeded("c:\\go", "e:\\src")
 	expected := "/d c:\\go"
 
 	if !strings.Contains(actual, expected) {
