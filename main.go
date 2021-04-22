@@ -9,11 +9,13 @@ import (
 
 func main() {
 	if len(os.Args) < 2 {
-		// no path given, cd alias should execute the command [cd] which prints cwd
-		fmt.Println(" ") // so that for loop returns a token (cf. README.md) and executes cd <space>
+		// no path given, cd alias should execute the command 'cd' which prints cwd
+		// the for loop in the calling script must return a token to execute 'cd <space>'
+		fmt.Println(" ")
 	} else {
 		cwd, _ := os.Getwd()
-		fmt.Println(addSwitchIfNeeded(os.Args[1], cwd))
+		path := strings.Join(os.Args[1:], " ")
+		fmt.Println(addSwitchIfNeeded(path, cwd))
 	}
 }
 
@@ -25,16 +27,8 @@ func addSwitchIfNeeded(path, cwd string) string {
 		a := strings.ToLower(cwd)[0]
 		b := strings.ToLower(path)[0]
 		if a != b {
-			return ("/d " + quote(path))
+			return ("/d " + path)
 		}
-	}
-	return quote(path)
-}
-
-// Quotes path if it contains spaces
-func quote(path string) string {
-	if strings.Contains(path, " ") {
-		return "\"" + path + "\""
 	}
 	return path
 }

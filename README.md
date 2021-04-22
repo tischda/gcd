@@ -32,15 +32,31 @@ c:\temp
 
 c:\> gcd.exe e:\temp
 /d e:\temp
+
+c:\> gcd.exe c:\program files
+c:\program files
 ~~~
 
 To actually change the working directory, define an alias to the cd command:
 
 ~~~
-ncd=FOR /F "tokens=1 delims='" %G IN ('gcd $1') do @cd %G
+ncd=FOR /F "tokens=1 delims='" %G IN ('gcd $*') do @cd %G
 ~~~
 
 (I am using [cmder](https://cmder.net/))
+
+
+### Known issues
+
+This fails:
+
+c:\> gcd.exe tips & tricks
+
+Workarounds:
+
+c:\> gcd.exe "tips & tricks"
+c:\> gcd.exe tips ^& tricks
+c:\> gcd.exe tips ? tricks
 
 
 ### References

@@ -11,27 +11,21 @@ func TestSimple(t *testing.T) {
 	compare(actual, expected, t)
 }
 
-func TestSame(t *testing.T) {
+func TestWithSpace(t *testing.T) {
+	actual := addSwitchIfNeeded("c:\\Program Files", "e:\\src")
+	expected := "c:\\Program Files"
+	compare(actual, expected, t)
+}
+
+func TestSameDrive(t *testing.T) {
 	actual := addSwitchIfNeeded("e:\\go", "e:\\src")
 	expected := "e:\\go"
 	compare(actual, expected, t)
 }
 
-func TestDifferent(t *testing.T) {
+func TestDifferentDrive(t *testing.T) {
 	actual := addSwitchIfNeeded("c:\\go", "e:\\src")
 	expected := "/d c:\\go"
-	compare(actual, expected, t)
-}
-
-func TestQuote(t *testing.T) {
-	actual := quote("c:\\Program Files")
-	expected := "\"c:\\Program Files\""
-	compare(actual, expected, t)
-}
-
-func TestNoQuote(t *testing.T) {
-	actual := quote("c:\\go")
-	expected := "c:\\go"
 	compare(actual, expected, t)
 }
 
