@@ -6,6 +6,8 @@ image: Visual Studio 2019
 
 environment:
   GOPATH: c:\gopath
+  GO111MODULE: on
+  GOPROXY: https://proxy.golang.org  
 
 init:
   - SET PATH=%GOPATH%\bin;%PATH%
@@ -15,10 +17,7 @@ init:
 install:
   - go version
   - go env
-  - mkdir %GOPATH%
-  # This is not a dependency but a test report filter...
-  - set GO111MODULE=on
-  - go install github.com/tischda/go2xunit
+  - go install github.com/tischda/go2xunit@latest
 
 build_script:
   - go build -ldflags "all=-s -w"
