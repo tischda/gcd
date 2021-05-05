@@ -10,6 +10,7 @@ environment:
 init:
   - SET PATH=%GOPATH%\bin;%PATH%
   - git config --global core.autocrlf input
+  - chcp 1252
 
 install:
   - go version

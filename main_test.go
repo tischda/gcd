@@ -5,6 +5,14 @@ import (
 	"testing"
 )
 
+func TestCodePage(t *testing.T) {
+	actual := GetConsoleCP()
+	expected := uint32(1252)
+	if actual != expected {
+		t.Errorf("Expected: %d, but was: %d", expected, actual)
+	}
+}
+
 func TestSimple(t *testing.T) {
 	actual := addSwitchIfNeeded("go", "e:\\src")
 	expected := "go"

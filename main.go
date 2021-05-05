@@ -5,6 +5,9 @@ import (
 	"os"
 	"regexp"
 	"strings"
+
+	"golang.org/x/text/encoding/charmap"
+	"golang.org/x/text/transform"
 )
 
 func main() {
@@ -15,7 +18,8 @@ func main() {
 	} else {
 		cwd, _ := os.Getwd()
 		path := strings.Join(os.Args[1:], " ")
-		fmt.Println(addSwitchIfNeeded(path, cwd))
+		param := addSwitchIfNeeded(path, cwd)
+		printEncodeParameter(param)
 	}
 }
 
@@ -31,4 +35,25 @@ func addSwitchIfNeeded(path, cwd string) string {
 		}
 	}
 	return path
+}
+
+// golang outputs UTF-8. This will not work on a standard Windows console.
+func printEncodeParameter(param string) {
+	var t *charmap.Charmap
+	switch cp := GetConsoleCP(); cp {
+	case uint32(437):
+		t = charmap.CodePage437
+	case uint32(850):
+		t = charmap.CodePage850
+	case uint32(1252):
+		t = charmap.Windows1252
+	default:
+		fmt.Println(param)
+		return
+	}
+	output, _, err := transform.String(t.NewEncoder(), param)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(output)
 }
