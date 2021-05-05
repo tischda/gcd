@@ -12,7 +12,6 @@ environment:
 init:
   - SET PATH=%GOPATH%\bin;%PATH%
   - git config --global core.autocrlf input
-  - chcp 1252
 
 install:
   - go version
@@ -23,7 +22,7 @@ build_script:
   - go build -ldflags "all=-s -w"
 
 test_script:
-  - go test -v -cover
+  - chcp 1252 && go test -v -cover
   - go test -v | go2xunit.exe -xunitnet > xunit-report.xml
 
 artifacts:
