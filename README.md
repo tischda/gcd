@@ -7,7 +7,7 @@ In particular this switch:
 	Use the /D switch to change current drive in addition to changing current
 	directory for a drive.
 
-I want it to be set transparently.
+I want it to be set automatically.
 
 
 ### Install
@@ -15,7 +15,7 @@ I want it to be set transparently.
 There are no dependencies.
 
 ~~~
-go get github.com/tischda/gcd
+go install github.com/tischda/gcd@latest
 ~~~
 
 ### Usage
@@ -50,14 +50,17 @@ ncd=FOR /F "tokens=1 delims='" %G IN ('gcd $*') do @cd %G
 
 This fails:
 
+~~~
 c:\> gcd.exe tips & tricks
+~~~
 
 Workarounds:
 
+~~~
 c:\> gcd.exe "tips & tricks"
 c:\> gcd.exe tips ^& tricks
 c:\> gcd.exe tips ? tricks
-
+~~~
 
 ### References
 
