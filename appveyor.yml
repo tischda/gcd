@@ -17,10 +17,7 @@ install:
   - go env
   - mkdir %GOPATH%
   # This is not a dependency but a test report filter...
-  # WARNING: behaviour will change in go 1.16
-  # cf. https://stackoverflow.com/questions/24878737/what-is-the-difference-between-go-get-and-go-install
-  - set GO111MODULE=off
-  - go get github.com/tischda/go2xunit
+  - go install github.com/tischda/go2xunit
 
 build_script:
   - go build -ldflags "all=-s -w"
