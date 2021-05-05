@@ -12,8 +12,6 @@ I want it to be set automatically.
 
 ### Install
 
-There are no dependencies.
-
 ~~~
 go install github.com/tischda/gcd@latest
 ~~~
