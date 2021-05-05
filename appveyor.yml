@@ -17,6 +17,7 @@ install:
   - go env
   - mkdir %GOPATH%
   # This is not a dependency but a test report filter...
+  - set GO111MODULE=on
   - go install github.com/tischda/go2xunit
 
 build_script:
