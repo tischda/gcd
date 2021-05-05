@@ -23,7 +23,7 @@ build_script:
 
 test_script:
   - chcp 1252 && go test -v -cover
-  - go test -v | go2xunit.exe -xunitnet > xunit-report.xml
+  - chcp 1252 && go test -v | go2xunit.exe -xunitnet > xunit-report.xml
 
 artifacts:
   - path: gcd.exe
