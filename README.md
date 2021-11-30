@@ -26,19 +26,19 @@ Example:
 
 ~~~
 c:\> gcd.exe c:\temp
-c:\temp
+"c:\temp"
 
 c:\> gcd.exe e:\temp
-/d e:\temp
+/d "e:\temp"
 
 c:\> gcd.exe c:\program files
-c:\program files
+"c:\program files"
 ~~~
 
 To actually change the working directory, define an alias to the cd command:
 
 ~~~
-ncd=FOR /F "tokens=1 delims='" %G IN ('gcd $*') do @cd %G
+ncd=FOR /F "delims=" %G IN ('gcd $*') do @cd %G
 ~~~
 
 (I am using [cmder](https://cmder.net/))
@@ -50,15 +50,41 @@ This fails:
 
 ~~~
 c:\> gcd.exe tips & tricks
+"tips"
+'tricks' is not recognized as an internal or external command,
+operable program or batch file.
 ~~~
 
 Workarounds:
 
 ~~~
 c:\> gcd.exe "tips & tricks"
-c:\> gcd.exe tips ^& tricks
 c:\> gcd.exe tips ? tricks
 ~~~
+
+Using the `ncd` alias, this will fail:
+
+~~~
+c:\> ncd (test)
+') was unexpected at this time.
+
+c:\> ncd music ^& videos
+The system cannot find the path specified.
+'videos' is not recognized as an internal or external command,
+operable program or batch file.
+~~~
+
+Workarounds:
+
+~~~
+c:\> ncd "(test)"
+c:\> ncd (test?
+
+c:\> ncd "music ^& videos"
+~~~
+
+As a general rule, if it fails, you want to use quoted paths.
+
 
 ### References
 

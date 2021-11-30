@@ -1,5 +1,9 @@
 ## Changelog
 
+##### gcd 1.3.0 - (30 November 2021)
+
+    * Improve handling of quoted paths
+
 ##### gcd 1.2.0 - (05 May 2021)
 
     * Handle special characters in path for codepages 437, 850 and 1252

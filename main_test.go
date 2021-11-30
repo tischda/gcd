@@ -33,7 +33,7 @@ func TestSameDrive(t *testing.T) {
 
 func TestDifferentDrive(t *testing.T) {
 	actual := addSwitchIfNeeded("c:\\go", "e:\\src")
-	expected := "/d c:\\go"
+	expected := "/d \"c:\\go\""
 	compare(actual, expected, t)
 }
 
