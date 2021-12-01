@@ -3,6 +3,8 @@
 ##### gcd 1.3.0 - (30 November 2021)
 
     * Improve handling of quoted paths
+    * Add -version flag
+    * Update Makefile to use goreleaser
 
 ##### gcd 1.2.0 - (05 May 2021)
 

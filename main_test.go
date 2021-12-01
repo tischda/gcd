@@ -5,6 +5,15 @@ import (
 	"testing"
 )
 
+func TestProcessArgs(t *testing.T) {
+	param := []string{"Program", "Files", "(x86)"}
+	actual := processArgs(param)
+	expected := "\"Program Files (x86)\""
+	if actual != expected {
+		t.Errorf("Expected: %s, but was: %s", expected, actual)
+	}
+}
+
 func TestCodePage(t *testing.T) {
 	actual := GetConsoleCP()
 	expected := uint32(1252)

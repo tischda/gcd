@@ -1,7 +1,9 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"log"
 	"os"
 	"regexp"
 	"strings"
@@ -10,25 +12,40 @@ import (
 	"golang.org/x/text/transform"
 )
 
+var version string
+var showVersion bool
+
+func init() {
+	flag.BoolVar(&showVersion, "version", false, "print version and exit")
+}
+
 func main() {
-	if len(os.Args) < 2 {
+	log.SetFlags(0)
+	flag.Parse()
+
+	if showVersion {
+		fmt.Printf("gcd %s - serves arguments to a \"cd\" command alias\n", version)
+	} else if len(os.Args) < 2 {
 		// no argument given, cd alias should execute the command 'cd' which prints cwd
 		// the for loop in the calling script must return a token to execute 'cd <space>'
 		fmt.Println(" ")
 	} else {
-		cwd, _ := os.Getwd()
-		path := strings.Join(os.Args[1:], " ")
-
-		// remove quotes: "Program Files (x86)" --> Program Files (x86)
-		// quotes will be re-added later so we have better control of what is quoted.
-		path = strings.ReplaceAll(path, "\"", "")
-
-		cmd := addSwitchIfNeeded(path, cwd)
-
-		// output must be formatted according to codepage
-		out := translateUTF8ToCodepage(cmd)
+		out := processArgs(os.Args[1:])
 		fmt.Println(out)
 	}
+}
+
+func processArgs(args []string) string {
+	cwd, _ := os.Getwd()
+	path := strings.Join(args, " ")
+
+	// remove quotes: "Program Files (x86)" --> Program Files (x86)
+	// quotes will be re-added later so we have better control of what is quoted.
+	path = strings.ReplaceAll(path, "\"", "")
+
+	cmd := addSwitchIfNeeded(path, cwd)
+
+	return translateUTF8ToCodepage(cmd)
 }
 
 // Use the /D switch to change current drive in addition to changing current

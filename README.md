@@ -22,7 +22,7 @@ go install github.com/tischda/gcd@latest
 gcd <path>
 ~~~
 
-Example:
+Examples:
 
 ~~~
 c:\> gcd.exe c:\temp
