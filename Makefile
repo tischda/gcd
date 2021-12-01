@@ -29,8 +29,12 @@ update:
 snapshot:
 	goreleaser --snapshot --skip-publish --rm-dist
 
-release: 
-	goreleaser release --rm-dist
+release: clean
+	# you must escape '#' and '$' characters
+	@sed '1,/\#\#.*${BUILD_TAG}/d;/\#\#/Q' CHANGELOG.md | sed '/^$$/d' > releaseinfo
+	goreleaser release --rm-dist --release-notes=releaseinfo
+	@rm -f releaseinfo
 
 clean:
 	go clean
+	rm -f releaseinfo
