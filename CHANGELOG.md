@@ -1,6 +1,6 @@
 ## Changelog
 
-##### gcd 1.3.0 - (30 November 2021)
+##### gcd 1.3.0 - (01 December 2021)
 
     * Improve handling of quoted paths
     * Add -version flag
