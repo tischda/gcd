@@ -10,7 +10,7 @@ all: build
 build:
 	go build ${LDFLAGS}
 
-test:	clean
+test:
 	go test -v -cover
 
 cover:
@@ -38,3 +38,4 @@ release: clean
 clean:
 	go clean
 	rm -f releaseinfo
+	rm -rf dist
