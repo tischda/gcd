@@ -1,21 +1,20 @@
-Changelog
-=========
+# Changelog
 
-## gcd v1.3.0 - (01 December 2021)
+## [v1.3.0] - 2021-12-01
 
 * Improve handling of quoted paths
 * Add -version flag
 * Update Makefile to use goreleaser
 
-## gcd v1.2.0 - (05 May 2021)
+## [v1.2.0] - 2021-05-05
 
 * Handle special characters in path for codepages 437, 850 and 1252
 
-## gcd v1.1.0 - (21 January 2021)
+## [v1.1.0] - 2021-01-21
 
 * Handle case when no path is specified
 * Handle path with spaces
 
-## gcd v1.0.0 - (19 January 2021)
+## [v1.0.0] - 2021-01-19
 
 * First version

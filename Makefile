@@ -1,8 +1,10 @@
 # ---------------------------------------------------------------------------
 # Makefile for CLI utilities
+# 
+# Escape '#' and '[' characters with '\', and '$' characters with '$$'
 # ---------------------------------------------------------------------------
 
-BUILD_TAG=$(shell git describe --tags 2>/dev/null || echo undefined)
+BUILD_TAG=$(shell git describe --tags 2>/dev/null || echo unreleased)
 LDFLAGS=-ldflags=all="-X main.version=${BUILD_TAG} -s -w"
 
 all: build
@@ -29,9 +31,8 @@ update:
 snapshot:
 	goreleaser --snapshot --skip-publish --rm-dist
 
-release: clean
-	# you must escape '#' and '$' characters
-	@sed '1,/\#\#.*${BUILD_TAG}/d;/\#\#/Q' CHANGELOG.md | sed '/^$$/d' > releaseinfo
+release: 
+	@sed '1,/\#\# \[${BUILD_TAG}/d;/^\#\# /Q' CHANGELOG.md > releaseinfo
 	goreleaser release --rm-dist --release-notes=releaseinfo
 	@rm -f releaseinfo
 
